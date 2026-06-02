@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Until We See Each Other ❤️</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    height:100vh;
+    overflow:hidden;
+    background:linear-gradient(to top,#87ceeb,#dff6ff);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    color:white;
+}
+
+.container{
+    z-index:10;
+    background:rgba(255,255,255,0.15);
+    backdrop-filter:blur(10px);
+    padding:40px;
+    border-radius:25px;
+    box-shadow:0 8px 30px rgba(0,0,0,0.2);
+}
+
+h1{
+    font-size:2.5rem;
+    margin-bottom:15px;
+}
+
+.love{
+    font-size:1.2rem;
+    margin-bottom:30px;
+}
+
+.countdown{
+    display:flex;
+    gap:20px;
+    justify-content:center;
+    flex-wrap:wrap;
+}
+
+.time-box{
+    min-width:110px;
+}
+
+.number{
+    font-size:3rem;
+    font-weight:bold;
+}
+
+.label{
+    font-size:1rem;
+    text-transform:uppercase;
+    letter-spacing:2px;
+}
+
+/* Clouds */
+.cloud{
+    position:absolute;
+    background:white;
+    border-radius:50px;
+    opacity:.7;
+}
+
+.cloud:before,
+.cloud:after{
+    content:"";
+    position:absolute;
+    background:white;
+    border-radius:50%;
+}
+
+.cloud1{
+    width:120px;
+    height:40px;
+    top:15%;
+    left:-150px;
+    animation:cloudMove 40s linear infinite;
+}
+
+.cloud1:before{
+    width:60px;
+    height:60px;
+    top:-25px;
+    left:15px;
+}
+
+.cloud1:after{
+    width:50px;
+    height:50px;
+    top:-20px;
+    right:15px;
+}
+
+.cloud2{
+    width:180px;
+    height:60px;
+    top:35%;
+    left:-250px;
+    animation:cloudMove 55s linear infinite;
+}
+
+.cloud2:before{
+    width:80px;
+    height:80px;
+    top:-35px;
+    left:25px;
+}
+
+.cloud2:after{
+    width:70px;
+    height:70px;
+    top:-30px;
+    right:25px;
+}
+
+@keyframes cloudMove{
+    from{transform:translateX(0);}
+    to{transform:translateX(calc(100vw + 400px));}
+}
+
+/* Airplane */
+.airplane{
+    position:absolute;
+    bottom:40px;
+    left:-150px;
+    font-size:70px;
+    animation:fly 12s linear infinite;
+}
+
+@keyframes fly{
+    0%{
+        transform:translateX(0) rotate(5deg);
+    }
+    25%{
+        transform:translateX(30vw) translateY(-15px) rotate(3deg);
+    }
+    50%{
+        transform:translateX(60vw) translateY(10px) rotate(-2deg);
+    }
+    100%{
+        transform:translateX(calc(100vw + 250px)) rotate(5deg);
+    }
+}
+
+.heart{
+    color:#ff4d6d;
+    animation:pulse 1.5s infinite;
+}
+
+@keyframes pulse{
+    0%,100%{transform:scale(1);}
+    50%{transform:scale(1.2);}
+}
+</style>
+</head>
+<body>
+
+<div class="cloud cloud1"></div>
+<div class="cloud cloud2"></div>
+
+<div class="container">
+    <h1>❤️ Until We See Each Other ❤️</h1>
+    <div class="love">
+        Every day is one day closer to being with you again
+        <span class="heart">♥</span>
+    </div>
+
+    <div class="countdown">
+        <div class="time-box">
+            <div class="number" id="days">0</div>
+            <div class="label">Days</div>
+        </div>
+
+        <div class="time-box">
+            <div class="number" id="hours">0</div>
+            <div class="label">Hours</div>
+        </div>
+
+        <div class="time-box">
+            <div class="number" id="minutes">0</div>
+            <div class="label">Minutes</div>
+        </div>
+
+        <div class="time-box">
+            <div class="number" id="seconds">0</div>
+            <div class="label">Seconds</div>
+        </div>
+    </div>
+</div>
+
+<div class="airplane">✈️</div>
+
+<script>
+const targetDate = new Date("September 29, 2026 00:00:00").getTime();
+
+function updateCountdown(){
+    const now = new Date().getTime();
+    const distance = targetDate - now;
+
+    if(distance < 0){
+        document.querySelector(".container").innerHTML =
+        "<h1>❤️ We're Together! ❤️</h1><p>The wait is finally over!</p>";
+        return;
+    }
+
+    const days = Math.floor(distance / (1000*60*60*24));
+    const hours = Math.floor((distance % (1000*60*60*24)) / (1000*60*60));
+    const minutes = Math.floor((distance % (1000*60*60)) / (1000*60));
+    const seconds = Math.floor((distance % (1000*60)) / 1000);
+
+    document.getElementById("days").textContent = days;
+    document.getElementById("hours").textContent = hours;
+    document.getElementById("minutes").textContent = minutes;
+    document.getElementById("seconds").textContent = seconds;
+}
+
+updateCountdown();
+setInterval(updateCountdown,1000);
+</script>
+
+</body>
+</html>
